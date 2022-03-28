@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "673102368992",
+    "project_id": "fire-up-fitness",
+    "storage_bucket": "fire-up-fitness.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673102368992:android:6f1dc02084c8ae36e44085",
+        "android_client_info": {
+          "package_name": "com.example.project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "673102368992-95ar0thgof5oq4bnqlnla0scfciu8qb3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO9WWuCQiGpps7KFFPPiGFO9ZrEMfBaq4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "673102368992-95ar0thgof5oq4bnqlnla0scfciu8qb3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
