@@ -34,7 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         decoration: InputDecoration(
           border: InputBorder.none,
           filled: true,
-          fillColor: const Color(0xFF5180ff),
+          fillColor: const Color.fromRGBO(255, 159, 129, 1.0),
           prefixIcon: prefixedIcon,
           hintText: hintText,
           hintStyle: const TextStyle(
@@ -103,11 +103,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Color(0xFF5967ff),
-                Color(0xFF5374ff),
-                Color(0xFF5180ff),
-                Color(0xFF538bff),
-                Color(0xFF5995ff),
+                Color.fromRGBO(255, 130, 100, 1),
+                Color.fromRGBO(255, 136, 106, 1.0),
+                Color.fromRGBO(255, 138, 108, 1.0),
+                Color.fromRGBO(255, 146, 123, 1.0),
+                Color.fromRGBO(255, 153, 128, 1.0),
               ],
             ),
           ),
@@ -122,7 +122,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     'Register',
                     style: TextStyle(
                       fontFamily: 'PT-Sans',
-                      fontSize: 30,
+                      fontSize: 50,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:project/register-screen.dart';
 import 'login-screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<WelcomeScreen> createState() => _HomeScreenState();
 }
 
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
 
@@ -128,11 +128,11 @@ class _HomeScreenState extends State<HomeScreen> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Color(0xFF5967ff),
-                Color(0xFF5374ff),
-                Color(0xFF5180ff),
-                Color(0xFF538bff),
-                Color(0xFF5995ff),
+                Color.fromRGBO(255, 130, 100, 1),
+                Color.fromRGBO(255, 130, 100, 1),
+                Color.fromRGBO(255, 130, 100, 1),
+                Color.fromRGBO(255, 130, 100, 1),
+                Color.fromRGBO(255, 130, 100, 1),
               ],
             ),
           ),
@@ -141,13 +141,13 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           Container(
           alignment: Alignment.topCenter,
-            child: Padding(padding: const EdgeInsets.only(top: 125),
+            child: Padding(padding: const EdgeInsets.only(top: 50),
           child: Image.asset('assets/images/logo.png'),
           )),
 
 
           const SizedBox(
-            height: 100,
+            height: 50,
           ),
           _buildLoginButton(),
           const SizedBox(
