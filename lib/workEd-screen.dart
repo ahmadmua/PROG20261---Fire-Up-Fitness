@@ -36,27 +36,27 @@ class _WorkEdScreenState extends State<WorkEdScreen> {
           unselectedFontSize: 14,
           onTap: (value) {
             if(value == 0){
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
                 return const HomeScreen();
               }));
             }
             else if(value == 1){
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
                 return const CalendarScreen();
               }));
             }
             else if(value == 2){
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
                 return const CreateWorkoutScreen();
               }));
             }
             else if(value == 3){
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
                 return const WorkEdScreen();
               }));
             }
             else if(value == 4){
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
                 return const PedometerScreen();
               }));
             }
