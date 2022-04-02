@@ -81,7 +81,7 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
             ),
             BottomNavigationBarItem(
               label: ('Pedometer'),
-              icon: FaIcon(FontAwesomeIcons.shoePrints),
+              icon: FaIcon(FontAwesomeIcons.personWalking),
             ),
           ],
         ),

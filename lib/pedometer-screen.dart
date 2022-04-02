@@ -82,7 +82,7 @@ class _PedometerScreenState extends State<PedometerScreen> {
             ),
             BottomNavigationBarItem(
               label: ('Pedometer'),
-              icon: FaIcon(FontAwesomeIcons.shoePrints),
+              icon: FaIcon(FontAwesomeIcons.personWalking),
             ),
           ],
         ),

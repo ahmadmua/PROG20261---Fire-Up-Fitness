@@ -79,7 +79,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
             BottomNavigationBarItem(
               label: ('Pedometer'),
-              icon: FaIcon(FontAwesomeIcons.shoePrints),
+              icon: FaIcon(FontAwesomeIcons.personWalking),
             ),
           ],
         ),

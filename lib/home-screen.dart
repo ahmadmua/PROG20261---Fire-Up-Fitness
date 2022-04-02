@@ -5,6 +5,7 @@ import 'package:project/pedometer-screen.dart';
 import 'package:project/register-screen.dart';
 import 'package:project/workEd-screen.dart';
 import 'login-screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,9 +14,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,64 +24,70 @@ class _HomeScreenState extends State<HomeScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: const Color.fromRGBO(255, 130, 100, 1),
       ),
-      body: GridView.count(
-          crossAxisCount: 2,
-        children: List.generate(4, (index){
-          return Center(
-            child:
+      body: Row(children: [
+        Column(
+          children: [
+            const SizedBox(
+              height: 80,
+            ),
             IconButton(
-              icon: Image.asset('assets/images/logo.png'),
+              icon: const Icon(Icons.add),
+              color: const Color.fromRGBO(103, 71, 255, 1.0),
               iconSize: 190,
               onPressed: () {
-                  if(index == 0){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return const PedometerScreen();
-                    }));
-                  }
-                  else if(index == 1){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return const CalendarScreen();
-                    }));
-                  }
-                  else if(index == 2){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return const WorkEdScreen();
-                    }));
-                  }
-                  else if(index == 3){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return const CreateWorkoutScreen();
-                    }));
-                  }
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const CreateWorkoutScreen();
+                }));
               },
             ),
-          );
-        })
-      )
+            const Text("Add Workout", style: TextStyle(fontSize: 25)),
+            IconButton(
+              icon: const Icon(Icons.fitness_center),
+              iconSize: 190,
+              color: const Color.fromRGBO(103, 71, 255, 1.0),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const WorkEdScreen();
+                }));
+              },
+            ),
+            const Text("Workout", style: TextStyle(fontSize: 25)),
+            const Text("Education", style: TextStyle(fontSize: 25)),
+          ],
+        ),
+        Column(
+          children: [
+            const SizedBox(
+              height: 80,
+            ),
+            IconButton(
+              icon: const Icon(Icons.calendar_month),
+              iconSize: 190,
+              color: const Color.fromRGBO(103, 71, 255, 1.0),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const CalendarScreen();
+                }));
+              },
+            ),
+            const Text("Calendar", style: TextStyle(fontSize: 25)),
+            IconButton(
+              icon: const FaIcon(FontAwesomeIcons.personWalking),
+              iconSize: 190,
+              color: const Color.fromRGBO(103, 71, 255, 1.0),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const PedometerScreen();
+                }));
+              },
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            const Text("Pedometer", style: TextStyle(fontSize: 25)),
+          ],
+        ),
+      ]),
     );
   }
 }
-
-
-// SafeArea(
-// child: Stack(
-// children: [
-// Center(
-// child: Container(
-// height: 195.0,
-// width: 195.0,
-// margin: const EdgeInsets.all(20.0),
-// decoration: BoxDecoration(
-// border: Border.all(color: Colors.white, width: 5.0),
-// borderRadius: BorderRadius.circular(10.0)
-// ),
-// child: const Image(
-// image: NetworkImage(
-// 'https://i.guim.co.uk/img/media/fe1e34da640c5c56ed16f76ce6f994fa9343d09d/0_174_3408_2046/master/3408.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=67773a9d419786091c958b2ad08eae5e'
-// ),
-// ),
-// ),
-// ),
-// ],
-// ),
-// ),

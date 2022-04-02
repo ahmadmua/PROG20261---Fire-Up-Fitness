@@ -81,7 +81,7 @@ class _WorkEdScreenState extends State<WorkEdScreen> {
             ),
             BottomNavigationBarItem(
               label: ('Pedometer'),
-              icon: FaIcon(FontAwesomeIcons.shoePrints),
+              icon: FaIcon(FontAwesomeIcons.personWalking),
             ),
           ],
         ),
