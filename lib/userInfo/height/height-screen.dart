@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:project/login-screen.dart';
 import 'package:project/userInfo/weight/weight.dart';
 
 import 'height.dart';
@@ -16,6 +19,8 @@ class _HeightScreen extends State<HeightScreen> {
 
   int foot = 0;
   int inches = 0;
+  late String height = foot.toString() + inches.toString();
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,15 @@ class _HeightScreen extends State<HeightScreen> {
                   ),
                 ),
               ),
-              onPressed: () {  },
+              onPressed: () {
+                final User? user = FirebaseAuth.instance.currentUser;
+                FirebaseFirestore.instance.collection('UserData').doc(user?.uid).update({"height": height}).then((value){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const LoginScreen();
+                  }));
+                });
+              },
+
               child: const Text(
                 'Continue',
                 style: TextStyle(
@@ -49,7 +62,6 @@ class _HeightScreen extends State<HeightScreen> {
                 ),
               )));
     }
-
 
     return Scaffold(
       backgroundColor: const Color.fromRGBO(255, 130, 100, 1),
@@ -87,7 +99,7 @@ class _HeightScreen extends State<HeightScreen> {
                   diameterRatio: 1.1,
                   physics: const FixedExtentScrollPhysics(),
                   childDelegate: ListWheelChildBuilderDelegate(
-                      childCount: 12,
+                      childCount: 8,
                       builder: (context, index) {
                         return Height(
                           height: index,
@@ -112,7 +124,7 @@ class _HeightScreen extends State<HeightScreen> {
                 diameterRatio: 1.1,
                 physics: const FixedExtentScrollPhysics(),
                 childDelegate: ListWheelChildBuilderDelegate(
-                    childCount: 8,
+                    childCount: 12,
                     builder: (context, index) {
                       return Weight(
                         weight: index,

@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:project/userInfo/height/height-screen.dart';
 import 'package:project/userInfo/weight/weight.dart';
 import 'weight.dart';
 
@@ -7,6 +10,7 @@ class WeightScreen extends StatefulWidget {
 
   @override
   State<WeightScreen> createState() => _WeightScreen();
+
 }
 
 class _WeightScreen extends State<WeightScreen> {
@@ -36,7 +40,14 @@ class _WeightScreen extends State<WeightScreen> {
                 ),
               ),
             ),
-            onPressed: () {  },
+            onPressed: () {
+              final User? user = FirebaseAuth.instance.currentUser;
+                FirebaseFirestore.instance.collection('UserData').doc(user?.uid).update({"weight": weight}).then((value){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const HeightScreen();
+                  }));
+                });
+            },
             child: const Text(
               'Continue',
               style: TextStyle(
@@ -117,3 +128,4 @@ class _WeightScreen extends State<WeightScreen> {
     );
   }
 }
+

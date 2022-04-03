@@ -94,11 +94,10 @@ class _LoginScreenState extends State<LoginScreen> {
             if (_key.currentState!.validate()) {
               await FirebaseAuth.instance.signInWithEmailAndPassword(
                   email: emailController.text,
-                  password: passwordController.text);
-
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  password: passwordController.text).then((value) =>
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return const HomeScreen();
-              }));
+              })));
             }
             errorMsg = "";
           }on FirebaseAuthException catch(error){

@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:project/login-screen.dart';
+import 'package:project/userInfo/weight/weight-screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
+
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
@@ -16,6 +17,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final passwordController = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   var errorMsg = "";
+
+  var id = "";
+
+  setID(var id1){
+    id = id1;
+  }
+
+  getID(){
+    return id;
+  }
+
 
   bool? isChecked = false;
 
@@ -85,30 +97,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
             color: Colors.black,
           ),
         ),
-        onPressed: () {
+        onPressed: () async {
+
           try {
             if (_key.currentState!.validate()) {
               FirebaseAuth.instance.createUserWithEmailAndPassword(
                   email: emailController.text,
                   password: passwordController.text).then((value){
-                  FirebaseFirestore.instance.collection('UserData').doc(value.user?.uid).set({"email": value.user?.email});
-              });
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const LoginScreen();
-              }));
+                    FirebaseFirestore.instance.collection('UserData').doc(value.user?.uid).set(
+                        {"userID": value.user?.uid, "email": value.user?.email, "weight": null, "height": null}).then((value) =>
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return const WeightScreen();
+                  })))
+                  ;});
             }
             errorMsg = "";
           }on FirebaseAuthException catch(error){
             errorMsg = error.message!;
           }
-
           setState(() {});
         },
       ),
     );
   }
-
-
 
 
   @override
@@ -259,3 +270,4 @@ String? validatePassword(String? formPass){
   return null;
 
 }
+
