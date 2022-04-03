@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project/login-screen.dart';
@@ -84,12 +85,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
             color: Colors.black,
           ),
         ),
-        onPressed: () async {
+        onPressed: () {
           try {
             if (_key.currentState!.validate()) {
-              await FirebaseAuth.instance.createUserWithEmailAndPassword(
+              FirebaseAuth.instance.createUserWithEmailAndPassword(
                   email: emailController.text,
-                  password: passwordController.text);
+                  password: passwordController.text).then((value){
+                  FirebaseFirestore.instance.collection('UserData').doc(value.user?.uid).set({"email": value.user?.email});
+              });
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return const LoginScreen();
               }));
