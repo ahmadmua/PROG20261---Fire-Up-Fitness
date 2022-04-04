@@ -1,10 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/home-screen.dart';
 import 'package:project/workEd-screen.dart';
-
 import 'calendar-screen.dart';
 import 'createWorkout-screen.dart';
+import 'package:pedometer/pedometer.dart';
 
 
 class PedometerScreen extends StatefulWidget {
@@ -17,6 +19,36 @@ class PedometerScreen extends StatefulWidget {
 
 class _PedometerScreenState extends State<PedometerScreen> {
   int _currentIndex = 4;
+
+  late Stream<StepCount> _stepCountStream;
+  String _steps = '?';
+
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+  }
+
+  void onStepCount(StepCount event) {
+    print(event);
+    setState(() {
+      _steps = event.steps.toString();
+    });
+  }
+
+  void onStepCountError(error) {
+    print('onStepCountError: $error');
+    setState(() {
+      _steps = 'Step Count not available';
+    });
+  }
+
+  void initPlatformState() {
+    _stepCountStream = Pedometer.stepCountStream;
+    _stepCountStream.listen(onStepCount).onError(onStepCountError);
+
+    if (!mounted) return;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +118,21 @@ class _PedometerScreenState extends State<PedometerScreen> {
             ),
           ],
         ),
-        body: const Text(
-          "Pedometer"
+        body: Column(
+          children:  <Widget> [
+            const SizedBox(
+              height: 80,
+            ),
+            const Center(
+              child: FaIcon(FontAwesomeIcons.personWalking, size: 190, color: Color.fromRGBO(120, 97, 255, 1.0)),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Text("10000", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 60, color: Color.fromRGBO(255, 130, 100, 1))),
+            const Text("Steps Today!", style: TextStyle(fontSize: 30)),
+            Text(_steps),
+          ],
         )
     );
   }

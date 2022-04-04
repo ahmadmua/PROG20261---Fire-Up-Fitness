@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             IconButton(
               icon: const Icon(Icons.add),
-              color: const Color.fromRGBO(103, 71, 255, 1.0),
+              color: const Color.fromRGBO(120, 97, 255, 1.0),
               iconSize: 190,
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
             IconButton(
               icon: const Icon(Icons.fitness_center),
               iconSize: 190,
-              color: const Color.fromRGBO(103, 71, 255, 1.0),
+              color: const Color.fromRGBO(120, 97, 255, 1.0),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return const WorkEdScreen();
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
             IconButton(
               icon: const Icon(Icons.calendar_month),
               iconSize: 190,
-              color: const Color.fromRGBO(103, 71, 255, 1.0),
+              color: const Color.fromRGBO(120, 97, 255, 1.0),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return const CalendarScreen();
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
             IconButton(
               icon: const FaIcon(FontAwesomeIcons.personWalking),
               iconSize: 190,
-              color: const Color.fromRGBO(103, 71, 255, 1.0),
+              color: const Color.fromRGBO(120, 97, 255, 1.0),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return const PedometerScreen();
