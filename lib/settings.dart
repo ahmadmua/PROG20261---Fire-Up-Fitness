@@ -1,26 +1,28 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:project/register-screen.dart';
+import 'package:project/userInfo/height/height-screen.dart';
+import 'package:project/userInfo/weight/weight-screen.dart';
+import 'package:project/welcome-screen.dart';
 import 'login-screen.dart';
 
-class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState();
+  State<SettingsScreen> createState() => _SettingsScreen();
 }
 
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _SettingsScreen extends State<SettingsScreen> {
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
   @override
   Widget build(BuildContext context) {
 
-    GoogleSignInAccount? user = _googleSignIn.currentUser;
 
-    Widget _buildLoginButton() {
+    Widget _buildWeightButton() {
       return SizedBox(
         height: 64,
         width: 400,
@@ -39,7 +41,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
             child:  const Text(
-              'Login',
+              'Update Weight',
               style: TextStyle(
                 fontFamily: 'PT-Sans',
                 fontSize: 25,
@@ -50,17 +52,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const LoginScreen();
+                return const WeightScreen();
               }));
             }
         ),
       );
     }
 
-    Widget _buildRegisterButton() {
+    Widget _buildLogOutButton() {
       return SizedBox(
-        height: 64,
-        width: 400,
+        height: 50,
+        width: 200,
         child: ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(
@@ -76,7 +78,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
             child:  const Text(
-              'Register',
+              'Log Out',
               style: TextStyle(
                 fontFamily: 'PT-Sans',
                 fontSize: 25,
@@ -85,50 +87,56 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
 
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const RegisterScreen();
-              }));
-            }
-        ),
-      );
-    }
-
-    Widget _buildLogoButton({
-      required String image,
-      required VoidCallback onPressed,
-    }) {
-      return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          primary: Colors.white,
-          elevation: 5,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0)),
-          fixedSize: const Size(250, 50),
-        ),
-        onPressed: onPressed,
-        child: SizedBox(
-          height: 40,
-          child: Image.asset(image),
-        ),
-      );
-    }
-
-    Widget _buildGoogleButton() {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _buildLogoButton(
-            image: 'assets/images/google_logo.png',
             onPressed: () async {
 
-              await _googleSignIn.signIn();
-              setState(() {});
-            },
-          )
-        ],
+              FirebaseAuth auth = FirebaseAuth.instance;
+              auth.signOut();
+
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const WelcomeScreen();
+              }));
+            }
+        ),
       );
     }
+
+    Widget _buildHeightButton() {
+      return SizedBox(
+        height: 64,
+        width: 400,
+        child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(
+                Colors.white,
+              ),
+              elevation: MaterialStateProperty.all(6),
+              shape: MaterialStateProperty.all(
+                const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+              ),
+            ),
+            child:  const Text(
+              'Update Height',
+              style: TextStyle(
+                fontFamily: 'PT-Sans',
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const HeightScreen();
+              }));
+            }
+        ),
+      );
+    }
+
 
     return  Scaffold(
 
@@ -149,25 +157,40 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
           child: Column(
               children: [
-                Container(
-                    alignment: Alignment.topCenter,
-                    child: Padding(padding: const EdgeInsets.only(top: 50),
-                      child: Image.asset('assets/images/logo.png'),
+
+                const SizedBox(
+                  height: 150,
+                ),
+
+                const Text(
+                    'Settings',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'PT-Sans',
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     )),
 
-
+                Container(
+                    alignment: Alignment.center,
+                    child: const Padding(padding: EdgeInsets.only(top: 50),
+                    )),
                 const SizedBox(
                   height: 50,
                 ),
-                _buildLoginButton(),
+                _buildWeightButton(),
                 const SizedBox(
                   height: 30,
                 ),
-                _buildRegisterButton(),
+                _buildHeightButton(),
+
                 const SizedBox(
-                  height: 60,
+                  height: 100,
                 ),
-                _buildGoogleButton()
+
+                _buildLogOutButton()
+
               ]),
 
 

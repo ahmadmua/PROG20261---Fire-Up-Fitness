@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:project/home-screen.dart';
 import 'package:project/login-screen.dart';
 import 'package:project/userInfo/weight/weight.dart';
 
@@ -47,7 +48,7 @@ class _HeightScreen extends State<HeightScreen> {
                 final User? user = FirebaseAuth.instance.currentUser;
                 FirebaseFirestore.instance.collection('UserData').doc(user?.uid).update({"height": height}).then((value){
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const LoginScreen();
+                    return const HomeScreen();
                   }));
                 });
               },

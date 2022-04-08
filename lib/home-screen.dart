@@ -1,8 +1,13 @@
+import 'dart:ffi';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:project/calendar-screen.dart';
 import 'package:project/createWorkout-screen.dart';
 import 'package:project/pedometer-screen.dart';
 import 'package:project/register-screen.dart';
+import 'package:project/settings.dart';
 import 'package:project/workEd-screen.dart';
 import 'login-screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,12 +20,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   @override
   Widget build(BuildContext context) {
+
+    final User? user = FirebaseAuth.instance.currentUser;
+    final uid = user?.email?.split("@");
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Home"),
+        title: Text("Home - Hello " + uid![0]),
+        actions: [IconButton(
+          icon: const Icon(Icons.settings_rounded),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return const SettingsScreen();
+            }));
+          },
+        )],
         automaticallyImplyLeading: false,
         backgroundColor: const Color.fromRGBO(255, 130, 100, 1),
       ),
