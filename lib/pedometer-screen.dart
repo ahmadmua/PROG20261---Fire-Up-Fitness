@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -29,7 +30,6 @@ class _PedometerScreenState extends State<PedometerScreen> {
   @override
   void initState() {
     super.initState();
-    calculateCalories();
     initPlatformState();
   }
 
@@ -37,6 +37,7 @@ class _PedometerScreenState extends State<PedometerScreen> {
     print(event);
     setState(() {
       _steps = event.steps.toString();
+      calculateCalories();
     });
   }
 
@@ -56,12 +57,17 @@ class _PedometerScreenState extends State<PedometerScreen> {
 
   void calculateCalories(){
     setState(() {
-      _stepsInt = int.parse(_steps);
-      _cals = (_stepsInt) / 40;
-      _calsInt = _cals.toInt();
+      // _stepsInt = int.parse(_steps);
+      // _cals = (_stepsInt) / 40;
+      // _calsInt = _cals.toInt();
+      var rng = Random();
+      for (var i = 0; i < 10; i++) {
+         _calsInt = (rng.nextInt(100));
+      }
 
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
