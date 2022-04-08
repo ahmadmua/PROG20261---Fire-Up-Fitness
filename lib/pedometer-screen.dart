@@ -8,7 +8,6 @@ import 'calendar-screen.dart';
 import 'createWorkout-screen.dart';
 import 'package:pedometer/pedometer.dart';
 
-
 class PedometerScreen extends StatefulWidget {
   const PedometerScreen({Key? key}) : super(key: key);
 
@@ -16,16 +15,21 @@ class PedometerScreen extends StatefulWidget {
   State<PedometerScreen> createState() => _PedometerScreenState();
 }
 
-
 class _PedometerScreenState extends State<PedometerScreen> {
   int _currentIndex = 4;
+  double _cals = 0;
+  int _calsInt = 0;
+  int _stepsInt = 0;
 
   late Stream<StepCount> _stepCountStream;
-  String _steps = '?';
+  String _steps = '0';
+  //String _steps = '?';
+  // _steps used to be a '?' instead of '0', if anything breaks that is why. needed to do this for the calorie counter
 
   @override
   void initState() {
     super.initState();
+    calculateCalories();
     initPlatformState();
   }
 
@@ -50,6 +54,15 @@ class _PedometerScreenState extends State<PedometerScreen> {
     if (!mounted) return;
   }
 
+  void calculateCalories(){
+    setState(() {
+      _stepsInt = int.parse(_steps);
+      _cals = (_stepsInt) / 40;
+      _calsInt = _cals.toInt();
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,28 +81,29 @@ class _PedometerScreenState extends State<PedometerScreen> {
           selectedFontSize: 14,
           unselectedFontSize: 14,
           onTap: (value) {
-            if(value == 0){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+            if (value == 0) {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) {
                 return const HomeScreen();
               }));
-            }
-            else if(value == 1){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+            } else if (value == 1) {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) {
                 return const CalendarScreen();
               }));
-            }
-            else if(value == 2){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+            } else if (value == 2) {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) {
                 return const CreateWorkoutScreen();
               }));
-            }
-            else if(value == 3){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+            } else if (value == 3) {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) {
                 return const WorkEdScreen();
               }));
-            }
-            else if(value == 4){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+            } else if (value == 4) {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) {
                 return const PedometerScreen();
               }));
             }
@@ -119,21 +133,43 @@ class _PedometerScreenState extends State<PedometerScreen> {
           ],
         ),
         body: Column(
-          children:  <Widget> [
+          children: <Widget>[
+            const SizedBox(
+              height: 100,
+            ),
+            const Center(
+              child: FaIcon(FontAwesomeIcons.personWalking,
+                  size: 190, color: Color.fromRGBO(120, 97, 255, 1.0)),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Text(_steps,
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 36,
+                    color: Color.fromRGBO(255, 130, 100, 1))),
+            const Text("Steps Today!", style: TextStyle(fontSize: 25)),
             const SizedBox(
               height: 80,
             ),
-            const Center(
-              child: FaIcon(FontAwesomeIcons.personWalking, size: 190, color: Color.fromRGBO(120, 97, 255, 1.0)),
+            Row(
+              children: [
+                const SizedBox(
+                  width: 25,
+                ),
+                const Icon(Icons.local_fire_department, size: 60),
+                Text("$_calsInt",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: Color.fromRGBO(255, 130, 100, 1))),
+                const Text(" Calories Burned!",
+                    style: TextStyle(
+                        fontSize: 25)),
+              ],
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Text("10000", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 60, color: Color.fromRGBO(255, 130, 100, 1))),
-            const Text("Steps Today!", style: TextStyle(fontSize: 30)),
-            Text(_steps),
           ],
-        )
-    );
+        ));
   }
 }
