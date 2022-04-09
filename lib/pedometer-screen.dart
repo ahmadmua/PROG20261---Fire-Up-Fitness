@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/home-screen.dart';
-import 'package:project/settings.dart';
 import 'package:project/workEd-screen.dart';
 import 'calendar-screen.dart';
 import 'createWorkout-screen.dart';
@@ -22,8 +21,6 @@ class _PedometerScreenState extends State<PedometerScreen> {
   int _calsInt = 0;
   int _stepsInt = 0;
 
-
-
   late Stream<StepCount> _stepCountStream;
   String _steps = '0';
   //String _steps = '?';
@@ -32,8 +29,8 @@ class _PedometerScreenState extends State<PedometerScreen> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
     calculateCalories();
+    initPlatformState();
   }
 
   void onStepCount(StepCount event) {
@@ -60,7 +57,7 @@ class _PedometerScreenState extends State<PedometerScreen> {
   void calculateCalories(){
     setState(() {
       _stepsInt = int.parse(_steps);
-      _cals =  _cals+1;
+      _cals = (_stepsInt) / 40;
       _calsInt = _cals.toInt();
 
     });
@@ -73,14 +70,6 @@ class _PedometerScreenState extends State<PedometerScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: const Text("Pedometer"),
-          actions: [IconButton(
-            icon: const Icon(Icons.settings_rounded),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const SettingsScreen();
-              }));
-            },
-          )],
           backgroundColor: const Color.fromRGBO(255, 130, 100, 1),
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -130,8 +119,8 @@ class _PedometerScreenState extends State<PedometerScreen> {
               icon: Icon(Icons.calendar_month),
             ),
             BottomNavigationBarItem(
-              label: ('Workout Plan'),
-              icon: Icon(Icons.whatshot),
+              label: ('Add Workout'),
+              icon: Icon(Icons.add),
             ),
             BottomNavigationBarItem(
               label: ('Exercises'),
