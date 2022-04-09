@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Home - Hello " + uid![0]),
+        title:  Text("Welcome: " + uid![0]),
         actions: [IconButton(
           icon: const Icon(Icons.settings_rounded),
           onPressed: () {
@@ -42,15 +42,19 @@ class _HomeScreenState extends State<HomeScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: const Color.fromRGBO(255, 130, 100, 1),
       ),
+
+
       body: Row(children: [
+
         Column(
           children: [
             const SizedBox(
-              height: 80,
+              height: 110,
             ),
+
             IconButton(
-              icon: const Icon(Icons.add),
-              color: const Color.fromRGBO(120, 97, 255, 1.0),
+              icon: const Icon(Icons.whatshot),
+              color: const Color.fromRGBO(255, 130, 100, 1),
               iconSize: 190,
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -58,11 +62,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 }));
               },
             ),
-            const Text("Add Workout", style: TextStyle(fontSize: 25)),
+
+
+            const Text("Workout Plan", style: TextStyle(fontSize: 25)),
+
+            const SizedBox(
+              height: 50,
+            ),
+
             IconButton(
               icon: const Icon(Icons.fitness_center),
               iconSize: 190,
-              color: const Color.fromRGBO(120, 97, 255, 1.0),
+              color: const Color.fromRGBO(255, 130, 100, 1),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return const WorkEdScreen();
@@ -76,12 +87,12 @@ class _HomeScreenState extends State<HomeScreen> {
         Column(
           children: [
             const SizedBox(
-              height: 80,
+              height: 110,
             ),
             IconButton(
               icon: const Icon(Icons.calendar_month),
               iconSize: 190,
-              color: const Color.fromRGBO(120, 97, 255, 1.0),
+              color: const Color.fromRGBO(255, 130, 100, 1),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return const CalendarScreen();
@@ -89,20 +100,28 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             const Text("Calendar", style: TextStyle(fontSize: 25)),
+            const SizedBox(
+              height: 50,
+            ),
+
             IconButton(
               icon: const FaIcon(FontAwesomeIcons.personWalking),
               iconSize: 190,
-              color: const Color.fromRGBO(120, 97, 255, 1.0),
+              color: const Color.fromRGBO(255, 130, 100, 1),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return const PedometerScreen();
                 }));
               },
             ),
+
+
+
             const SizedBox(
               height: 15,
             ),
             const Text("Pedometer", style: TextStyle(fontSize: 25)),
+
           ],
         ),
       ]),

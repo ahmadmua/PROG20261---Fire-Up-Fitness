@@ -130,8 +130,8 @@ class _PedometerScreenState extends State<PedometerScreen> {
               icon: Icon(Icons.calendar_month),
             ),
             BottomNavigationBarItem(
-              label: ('Add Workout'),
-              icon: Icon(Icons.add),
+              label: ('Workout Plan'),
+              icon: Icon(Icons.whatshot),
             ),
             BottomNavigationBarItem(
               label: ('Exercises'),
