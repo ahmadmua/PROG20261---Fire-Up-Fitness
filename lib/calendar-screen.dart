@@ -4,6 +4,7 @@ import 'package:project/home-screen.dart';
 import 'package:project/pedometer-screen.dart';
 import 'package:project/workEd-screen.dart';
 import 'createWorkout-screen.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({Key? key}) : super(key: key);
@@ -15,6 +16,10 @@ class CalendarScreen extends StatefulWidget {
 
 class _CalendarScreenState extends State<CalendarScreen> {
   int _currentIndex = 1;
+  DateTime? _selectedDay;
+  DateTime _focusedDay = DateTime.now();
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,9 +88,29 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
           ],
         ),
-        body: const Text(
-            "Calendar"
-        )
+        body: TableCalendar(
+          firstDay: DateTime.utc(2015, 10, 16),
+          lastDay: DateTime.utc(2030, 3, 14),
+          focusedDay: DateTime.now(),
+          selectedDayPredicate: (day) {
+            return isSameDay(_selectedDay, day);
+          },
+          onDaySelected: (selectedDay, focusedDay) {
+            setState(() {
+              _selectedDay = selectedDay;
+              _focusedDay = focusedDay; // update `_focusedDay` here as well
+            });
+          },
+          calendarFormat: _calendarFormat,
+          onFormatChanged: (format) {
+            setState(() {
+              _calendarFormat = format;
+            });
+          },
+          onPageChanged: (focusedDay) {
+            _focusedDay = focusedDay;
+          },
+        ),
     );
   }
 }
