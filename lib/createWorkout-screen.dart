@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/home-screen.dart';
 import 'package:project/pedometer-screen.dart';
+import 'package:project/settings.dart';
 import 'package:project/workEd-screen.dart';
 import 'calendar-screen.dart';
 
@@ -23,6 +24,14 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           automaticallyImplyLeading: false,
+          actions: [IconButton(
+            icon: const Icon(Icons.settings_rounded),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const SettingsScreen();
+              }));
+            },
+          )],
           title: const Text("Create Workout"),
           backgroundColor: const Color.fromRGBO(255, 130, 100, 1),
         ),

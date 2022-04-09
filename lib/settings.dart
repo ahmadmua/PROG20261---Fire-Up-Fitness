@@ -1,11 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:project/register-screen.dart';
-import 'package:project/userInfo/height/height-screen.dart';
-import 'package:project/userInfo/weight/weight-screen.dart';
+import 'package:project/userInfo/height/height-settings-screen.dart';
+import 'package:project/userInfo/weight/weight-settings-screen.dart';
 import 'package:project/welcome-screen.dart';
-import 'login-screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -52,7 +49,7 @@ class _SettingsScreen extends State<SettingsScreen> {
 
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const WeightScreen();
+                return const WeightSettingsScreen();
               }));
             }
         ),
@@ -130,7 +127,7 @@ class _SettingsScreen extends State<SettingsScreen> {
 
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const HeightScreen();
+                return const HeightSettingsScreen();
               }));
             }
         ),

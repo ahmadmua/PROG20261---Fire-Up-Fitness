@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/home-screen.dart';
+import 'package:project/settings.dart';
 import 'package:project/workEd-screen.dart';
 import 'calendar-screen.dart';
 import 'createWorkout-screen.dart';
@@ -72,6 +73,14 @@ class _PedometerScreenState extends State<PedometerScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: const Text("Pedometer"),
+          actions: [IconButton(
+            icon: const Icon(Icons.settings_rounded),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const SettingsScreen();
+              }));
+            },
+          )],
           backgroundColor: const Color.fromRGBO(255, 130, 100, 1),
         ),
         bottomNavigationBar: BottomNavigationBar(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/home-screen.dart';
 import 'package:project/pedometer-screen.dart';
+import 'package:project/settings.dart';
 import 'calendar-screen.dart';
 import 'createWorkout-screen.dart';
 
@@ -24,6 +25,14 @@ class _WorkEdScreenState extends State<WorkEdScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: const Text("Workout Education"),
+          actions: [IconButton(
+            icon: const Icon(Icons.settings_rounded),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const SettingsScreen();
+              }));
+            },
+          )],
           backgroundColor: const Color.fromRGBO(255, 130, 100, 1),
         ),
         bottomNavigationBar: BottomNavigationBar(
