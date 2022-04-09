@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -29,7 +30,6 @@ class _PedometerScreenState extends State<PedometerScreen> {
   @override
   void initState() {
     super.initState();
-    calculateCalories();
     initPlatformState();
   }
 
@@ -53,15 +53,50 @@ class _PedometerScreenState extends State<PedometerScreen> {
 
     if (!mounted) return;
   }
+  //
+  // void calculateCalories(){
+  //   setState(() {
+  //     // _stepsInt = int.parse(_steps);
+  //     // _cals = (_stepsInt) / 40;
+  //     // _calsInt = _cals.toInt();
+  //     // var rng = Random();
+  //     // for (var i = 0; i < 10; i++) {
+  //     //    _calsInt = (rng.nextInt(100));
+  //     // }
+  //
+  //
+  //
+  //   });
+  // }
 
-  void calculateCalories(){
-    setState(() {
-      _stepsInt = int.parse(_steps);
-      _cals = (_stepsInt) / 40;
-      _calsInt = _cals.toInt();
+  void showCalories() {
 
-    });
+    // _steps = "1000";
+    _stepsInt = int.parse(_steps);
+    _cals = (_stepsInt) / 40;
+    _calsInt = _cals.toInt();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: Text("$_calsInt"),
+          content: const Text("Calories Burned!"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            TextButton(
+              child: const Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -153,22 +188,27 @@ class _PedometerScreenState extends State<PedometerScreen> {
             const SizedBox(
               height: 80,
             ),
-            Row(
-              children: [
-                const SizedBox(
-                  width: 25,
-                ),
-                const Icon(Icons.local_fire_department, size: 60),
-                Text("$_calsInt",
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                        color: Color.fromRGBO(255, 130, 100, 1))),
-                const Text(" Calories Burned!",
-                    style: TextStyle(
-                        fontSize: 25)),
-              ],
+            FloatingActionButton(
+              onPressed: (){showCalories();},
+              backgroundColor: const Color.fromRGBO(255, 130, 100, 1),
+              child: const Icon(Icons.local_fire_department),
             ),
+            // Row(
+            //   children: [
+            //     const SizedBox(
+            //       width: 25,
+            //     ),
+            //     const Icon(Icons.local_fire_department, size: 60),
+            //     Text("$_calsInt",
+            //         style: const TextStyle(
+            //             fontWeight: FontWeight.bold,
+            //             fontSize: 25,
+            //             color: Color.fromRGBO(255, 130, 100, 1))),
+            //     const Text(" Calories Burned!",
+            //         style: TextStyle(
+            //             fontSize: 25)),
+            //   ],
+            // ),
           ],
         ));
   }
