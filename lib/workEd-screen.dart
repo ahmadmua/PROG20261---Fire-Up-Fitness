@@ -121,8 +121,9 @@ class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderSt
                 ),
                 child: Text(_muscleGroupsList[index]),
                 onPressed: () => {
+
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const WorkEdList();
+                  return WorkEdList(index: _muscleGroupsList[index].toString());
                 }
                 ))},
               );
