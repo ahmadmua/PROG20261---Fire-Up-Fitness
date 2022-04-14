@@ -18,10 +18,10 @@ class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderSt
   int _currentIndex = 3;
 
   final List<String> _muscleGroupsList = [
-    "Back & Biceps",
-    "Chest & Triceps",
-    "Front Legs",
-    "Back Legs",
+    "BackBiceps",
+    "ChestTriceps",
+    "FrontLegs",
+    "BackLegs",
     "Shoulders",
     "Core",
   ];
@@ -123,7 +123,7 @@ class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderSt
                 onPressed: () => {
 
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return WorkEdList(index: _muscleGroupsList[index].toString());
+                  return WorkEdList(index: _muscleGroupsList[index].toString(), );
                 }
                 ))},
               );

@@ -1,28 +1,33 @@
 
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/pedometer-screen.dart';
 import 'package:project/settings.dart';
 import 'package:project/workEd-screen.dart';
-
 import 'calendar-screen.dart';
 import 'createWorkout-screen.dart';
 import 'home-screen.dart';
+import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
 
 class WorkEdList extends StatefulWidget{
+  const WorkEdList({Key? key, required this.index }) : super(key: key);
+
   final String index;
-  const WorkEdList({Key? key, required this.index}) : super(key: key);
-
-
   @override
-  State<WorkEdList> createState() => _WorkEdListState();
+  _WorkEdListState createState() => _WorkEdListState();
 }
 
-class _WorkEdListState extends State<WorkEdList> with SingleTickerProviderStateMixin {
+class _WorkEdListState extends State<WorkEdList>{
   int _currentIndex = 3;
-
-
+  late List<WorkoutItem> workouts = [];
+  late final DatabaseReference _workoutRef = FirebaseDatabase.instance.ref().child('Workouts/${widget.index}');
 
 
   @override
@@ -104,7 +109,32 @@ class _WorkEdListState extends State<WorkEdList> with SingleTickerProviderStateM
           ),
         ],
       ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {  },
+          child: Flexible( child: FirebaseAnimatedList(query: _workoutRef, itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
+              Map workouts = snapshot.value as Map;
 
+
+              return ListTile(
+                title: ElevatedButton(child: Text(snapshot.key.toString()), onPressed: () {  },),
+              );
+            },
+            )
+          )
+        )
+      )
     );
   }
+}
+
+class WorkoutItem{
+  final String name;
+  final String url;
+  final String targetGroups;
+  final String description;
+
+  WorkoutItem( this.url,  this.targetGroups,  this.description, this.name);
+
+
 }
