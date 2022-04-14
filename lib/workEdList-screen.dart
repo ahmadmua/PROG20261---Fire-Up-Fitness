@@ -41,6 +41,7 @@ class _WorkEdListState extends State<WorkEdList>{
       setState(() {
         data = new Map<String, dynamic>.from(event.snapshot.value as Map);
       });
+      log(data.toString());
     });
   }
 
