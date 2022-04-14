@@ -26,8 +26,24 @@ class WorkEdList extends StatefulWidget{
 
 class _WorkEdListState extends State<WorkEdList>{
   int _currentIndex = 3;
-  late List<WorkoutItem> workouts = [];
+  late var data;
   late final DatabaseReference _workoutRef = FirebaseDatabase.instance.ref().child('Workouts/${widget.index}');
+
+  @override
+  void initState() {
+    super.initState();
+    _activateListeners();
+  }
+
+
+  void _activateListeners(){
+    _workoutRef.onValue.listen((event) {
+      setState(() {
+        data = new Map<String, dynamic>.from(event.snapshot.value as Map);
+      });
+    });
+  }
+
 
 
   @override
