@@ -19,7 +19,6 @@ class WorkEdDetailScreen extends StatefulWidget {
 }
 
 class _WorkEdDetailScreenState extends State<WorkEdDetailScreen> with SingleTickerProviderStateMixin {
-  int _currentIndex = 3;
 
 
   @override
