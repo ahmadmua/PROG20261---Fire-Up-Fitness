@@ -121,8 +121,7 @@ class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderSt
                 //perhaps add some images to the background of each button to give more of an appeal
 
 
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent)
+                style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent),
                 ),
                 child: Text(_muscleGroupsList[index]),
                 onPressed: () => {
