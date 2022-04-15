@@ -10,6 +10,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/pedometer-screen.dart';
 import 'package:project/settings.dart';
 import 'package:project/workEd-screen.dart';
+import 'package:project/workEdDetail-screen.dart';
 import 'calendar-screen.dart';
 import 'createWorkout-screen.dart';
 import 'home-screen.dart';
@@ -18,8 +19,8 @@ import 'package:firebase_core/firebase_core.dart';
 
 class WorkEdList extends StatefulWidget{
   const WorkEdList({Key? key, required this.index }) : super(key: key);
-
   final String index;
+
   @override
   _WorkEdListState createState() => _WorkEdListState();
 }
@@ -132,10 +133,13 @@ class _WorkEdListState extends State<WorkEdList>{
           child: Flexible( child: FirebaseAnimatedList(query: _workoutRef, itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
               Map workouts = snapshot.value as Map;
 
+              return ListTile(title:  Text(snapshot.key.toString()),
 
-              return ListTile(
-                title: ElevatedButton(child: Text(snapshot.key.toString()), onPressed: () {  },),
-              );
+                onTap:() {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => WorkEdDetailScreen(data: data["Pullup"],)));
+                      //  WorkEdDetailScreen(data: data["Pullup"] : this line of code needs to be changed were "pullup" is to a dynamic way of navigating to the detail page with the exercise
+                  },
+                );
             },
             )
           )
