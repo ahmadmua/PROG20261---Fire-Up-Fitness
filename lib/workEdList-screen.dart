@@ -53,7 +53,12 @@ class _WorkEdListState extends State<WorkEdList>{
 
     return Scaffold(
       appBar: AppBar(
-        //TODO implement an IconButton that navigates to the WorkEd main screen
+        leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context){
+            return WorkEdScreen();
+          }));
+        },
+        ),
         automaticallyImplyLeading: false,
         title: Text(widget.index),
         actions: [
