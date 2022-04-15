@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/pedometer-screen.dart';
 import 'package:project/settings.dart';
 import 'package:project/workEd-screen.dart';
+import 'package:project/workEdList-screen.dart';
 
 import 'calendar-screen.dart';
 import 'createWorkout-screen.dart';
@@ -25,7 +26,12 @@ class _WorkEdDetailScreenState extends State<WorkEdDetailScreen> with SingleTick
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          //TODO implement an IconButton that navigates to the WorkEd List screen
+          leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context){
+              return WorkEdList(index: widget.data['parent'] );
+            }));
+          },
+          ),
         automaticallyImplyLeading: false,
         title: Text(widget.data['name'].toString()),
         actions: [

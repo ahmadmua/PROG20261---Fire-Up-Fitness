@@ -18,10 +18,10 @@ class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderSt
   int _currentIndex = 3;
 
   final List<String> _muscleGroupsList = [
-    "BackBiceps",
-    "ChestTriceps",
-    "FrontLegs",
-    "BackLegs",
+    "Back & Biceps",
+    "Chest & Triceps",
+    "Front Legs",
+    "Back Legs",
     "Shoulders",
     "Core",
   ];
