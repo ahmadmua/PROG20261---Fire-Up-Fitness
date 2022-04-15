@@ -136,7 +136,8 @@ class _WorkEdListState extends State<WorkEdList>{
               return ListTile(title:  Text(snapshot.key.toString()),
 
                 onTap:() {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => WorkEdDetailScreen(data: data["Pullup"],)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => WorkEdDetailScreen(data: data,)));
+
                       //  WorkEdDetailScreen(data: data["Pullup"] : this line of code needs to be changed were "pullup" is to a dynamic way of navigating to the detail page with the exercise
                   },
                 );
