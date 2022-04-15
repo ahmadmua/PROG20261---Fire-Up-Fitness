@@ -23,17 +23,12 @@ class WorkEdDetailScreen extends StatefulWidget {
 class _WorkEdDetailScreenState extends State<WorkEdDetailScreen>
     with SingleTickerProviderStateMixin {
   late YoutubePlayerController videoController;
+  late var url = (widget.data['url'].toString());
 
-  void loadVideo() {
-    var url = (widget.data['url'].toString());
-    videoController = YoutubePlayerController(
-        initialVideoId: (YoutubePlayer.convertUrlToId(url) as String),
-        flags: YoutubePlayerFlags(enableCaption: false, autoPlay: true));
-  }
+
 
   @override
   void initState() {
-    loadVideo();
     super.initState();
   }
 
@@ -63,36 +58,29 @@ class _WorkEdDetailScreenState extends State<WorkEdDetailScreen>
         ],
         backgroundColor: const Color.fromRGBO(255, 130, 100, 1),
       ),
-      body: Center(
-        //TODO display all feilds being passed over within the data variable passed from the other page
-        //TODO Milestone: Implement and embeded youtube player in the app to show video content from youtube
+      body: SingleChildScrollView(
+        child: Center(
+          //TODO display all feilds being passed over within the data variable passed from the other page
+          //TODO Milestone: Implement and embeded youtube player in the app to show video content from youtube
 
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: 40.0),
-              padding:EdgeInsets.all(25.0) ,
-              child: YoutubePlayerBuilder(
-                player: YoutubePlayer(
-                  controller: videoController,
-                ),
-                builder: (context, player) {
-                  return Column(
-                    children: <Widget>[
-                      player,
-                      const SizedBox(
-                        height: 40.0,
-                      )
-                    ],
-                  );
-                },
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(top: 40.0),
+                padding:EdgeInsets.all(25.0) ,
+                child: YoutubePlayer(
+                  controller: YoutubePlayerController(
+                    //need to add something to ensure if the video is not there/present default or display a text that video is not there so page works rather than not
+                      initialVideoId: (YoutubePlayer.convertUrlToId(url) as String),
+                      flags: YoutubePlayerFlags(enableCaption: false, autoPlay: true, hideControls: true, forceHD: false, loop: true,)),
+                ) ,
               ),
-            ),
-            Text(widget.data['targetGroups'].toString()),
-            Text(widget.data['description'].toString())
-          ],
+              Text(widget.data['targetGroups'].toString()),
+              Text('Description: ${widget.data['description'].toString()}')
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }
