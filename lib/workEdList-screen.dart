@@ -40,7 +40,7 @@ class _WorkEdListState extends State<WorkEdList>{
   void _activateListeners(){
     _workoutRef.onValue.listen((event) {
       setState(() {
-        data = new Map<String, dynamic>.from(event.snapshot.value as Map);
+        data = Map<String, dynamic>.from(event.snapshot.value as Map);
       });
       log(data.toString());
     });
@@ -53,6 +53,7 @@ class _WorkEdListState extends State<WorkEdList>{
 
     return Scaffold(
       appBar: AppBar(
+        //TODO implement an IconButton that navigates to the WorkEd main screen
         automaticallyImplyLeading: false,
         title: Text(widget.index),
         actions: [
@@ -146,15 +147,4 @@ class _WorkEdListState extends State<WorkEdList>{
         )
       );
   }
-}
-
-class WorkoutItem{
-  final String name;
-  final String url;
-  final String targetGroups;
-  final String description;
-
-  WorkoutItem( this.url,  this.targetGroups,  this.description, this.name);
-
-
 }

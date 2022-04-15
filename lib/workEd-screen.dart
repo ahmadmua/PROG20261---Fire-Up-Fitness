@@ -116,6 +116,11 @@ class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderSt
           delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
               return ElevatedButton(
+
+                //TODO need to improve the style of the buttons
+                //perhaps add some images to the background of each button to give more of an appeal
+
+
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent)
                 ),
@@ -130,7 +135,6 @@ class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderSt
             },
             childCount: _muscleGroupsList.length,
           ),
-
           ),
         ],
       ) ,

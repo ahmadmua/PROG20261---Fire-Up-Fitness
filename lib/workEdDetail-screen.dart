@@ -26,6 +26,7 @@ class _WorkEdDetailScreenState extends State<WorkEdDetailScreen> with SingleTick
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          //TODO implement an IconButton that navigates to the WorkEd List screen
         automaticallyImplyLeading: false,
         title: Text(widget.data['name'].toString()),
         actions: [
@@ -40,67 +41,12 @@ class _WorkEdDetailScreenState extends State<WorkEdDetailScreen> with SingleTick
         ],
         backgroundColor: const Color.fromRGBO(255, 130, 100, 1),
       ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: _currentIndex,
-          backgroundColor: const Color.fromRGBO(255, 130, 100, 1),
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white.withOpacity(.60),
-          selectedFontSize: 14,
-          unselectedFontSize: 14,
-          onTap: (value) {
-            if (value == 0) {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) {
-                    return const HomeScreen();
-                  }));
-            } else if (value == 1) {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) {
-                    return const CalendarScreen();
-                  }));
-            } else if (value == 2) {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) {
-                    return const CreateWorkoutScreen();
-                  }));
-            } else if (value == 3) {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) {
-                    return const WorkEdScreen();
-                  }));
-            } else if (value == 4) {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) {
-                    return const PedometerScreen();
-                  }));
-            }
-            setState(() => _currentIndex = value);
-          },
-          items: const [
-            BottomNavigationBarItem(
-              label: ('Home'),
-              icon: Icon(Icons.home),
-            ),
-            BottomNavigationBarItem(
-              label: ('Calendar'),
-              icon: Icon(Icons.calendar_month),
-            ),
-            BottomNavigationBarItem(
-              label: ('Workout Plan'),
-              icon: Icon(Icons.whatshot),
-            ),
-            BottomNavigationBarItem(
-              label: ('Exercises'),
-              icon: Icon(Icons.fitness_center),
-            ),
-            BottomNavigationBarItem(
-              label: ('Pedometer'),
-              icon: Icon(FontAwesomeIcons.personWalking),
-            ),
-          ],
-        ),
-    body: const Center(child: Text("yo"),) ,
+    body: Center(
+
+      //TODO display all feilds being passed over within the data variable passed from the other page
+      //TODO Milestone: Implement and embeded youtube player in the app to show video content from youtube
+
+      child: Text(widget.data['name'].toString()),) ,
     );
   }
 }
