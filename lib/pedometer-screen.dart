@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/home-screen.dart';
 import 'package:project/settings.dart';
-import 'package:project/workEd-screen.dart';
+import 'package:project/workEd/workEd-screen.dart';
 import 'calendar-screen.dart';
 import 'createWorkout-screen.dart';
 import 'package:pedometer/pedometer.dart';

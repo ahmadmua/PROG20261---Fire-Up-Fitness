@@ -9,11 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/pedometer-screen.dart';
 import 'package:project/settings.dart';
-import 'package:project/workEd-screen.dart';
-import 'package:project/workEdDetail-screen.dart';
-import 'calendar-screen.dart';
-import 'createWorkout-screen.dart';
-import 'home-screen.dart';
+import 'package:project/workEd/workEd-screen.dart';
+import 'package:project/workEd/workEdDetail-screen.dart';
+import '../calendar-screen.dart';
+import '../createWorkout-screen.dart';
+import '../home-screen.dart';
 import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -26,7 +26,6 @@ class WorkEdList extends StatefulWidget{
 }
 
 class _WorkEdListState extends State<WorkEdList>{
-  int _currentIndex = 3;
   late var data;
   late final DatabaseReference _workoutRef = FirebaseDatabase.instance.ref().child('Workouts/${widget.index}');
 
@@ -55,7 +54,7 @@ class _WorkEdListState extends State<WorkEdList>{
       appBar: AppBar(
         leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context){
-            return WorkEdScreen();
+            return const WorkEdScreen();
           }));
         },
         ),
@@ -75,7 +74,6 @@ class _WorkEdListState extends State<WorkEdList>{
       ),
       body: Center(
         child: Flexible( child: FirebaseAnimatedList(query: _workoutRef, itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
-              Map workouts = snapshot.value as Map;
 
               return ListTile(title:  Text(snapshot.key.toString()),
 

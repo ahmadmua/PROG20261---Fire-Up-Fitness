@@ -5,7 +5,7 @@ import 'package:project/pedometer-screen.dart';
 import 'package:project/userInfo/height/height-settings-screen.dart';
 import 'package:project/userInfo/weight/weight-settings-screen.dart';
 import 'package:project/welcome-screen.dart';
-import 'package:project/workEd-screen.dart';
+import 'package:project/workEd/workEd-screen.dart';
 
 import 'calendar-screen.dart';
 import 'createWorkout-screen.dart';

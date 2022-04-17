@@ -1,9 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/home-screen.dart';
 import 'package:project/pedometer-screen.dart';
 import 'package:project/settings.dart';
-import 'package:project/workEd-screen.dart';
+import 'package:project/workEd/workEd-screen.dart';
+import 'package:project/workEd/workEdDetail-screen.dart';
 import 'calendar-screen.dart';
 
 
@@ -14,12 +19,74 @@ class CreateWorkoutScreen extends StatefulWidget {
   State<CreateWorkoutScreen> createState() => _CreateWorkoutScreenState();
 }
 
+late DatabaseReference monday = FirebaseDatabase.instance.ref().child('');
+late DatabaseReference tuesday = FirebaseDatabase.instance.ref().child('');
 
 class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
+
+  var weight = 0;
+  var height = "";
+
   int _currentIndex = 2;
+
+  late var data1;
+  late var data2;
+
+
+  final List<String> _muscleGroupsList = [
+    "Monday",
+    "Tuesday"
+  ];
+
+
+  @override
+  void initState() {
+    super.initState();
+    _activateListeners();
+
+  }
+
+
+  void _activateListeners(){
+    monday.onValue.listen((event) {
+      setState(() {
+        data1 = Map<String, dynamic>.from(event.snapshot.value as Map);
+        _muscleGroupsList;
+      });
+    });
+
+    tuesday.onValue.listen((event) {
+      setState(() {
+        data2 = Map<String, dynamic>.from(event.snapshot.value as Map);
+        _muscleGroupsList;
+      });
+    });
+
+  }
+
+
+  void condition() {
+
+    final User? user = FirebaseAuth.instance.currentUser;
+    FirebaseFirestore.instance.collection('UserData').doc(user?.uid).get().then((value) =>
+    weight = value.data()?['weight']
+    );
+
+    FirebaseFirestore.instance.collection('UserData').doc(user?.uid).get().then((value) =>
+    height = value.data()?['height']
+    );
+
+    if(weight == 50){
+      monday = FirebaseDatabase.instance.ref().child('Plan1/${_muscleGroupsList[0]}');
+      tuesday = FirebaseDatabase.instance.ref().child('Plan1/${_muscleGroupsList[1]}');
+    }
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -32,7 +99,7 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
               }));
             },
           )],
-          title: const Text("Create Workout"),
+          title:  const Text("Workout Plan"),
           backgroundColor: const Color.fromRGBO(255, 130, 100, 1),
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -71,6 +138,7 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
             }
             setState(() => _currentIndex = value);
           },
+
           items: const [
             BottomNavigationBarItem(
               label: ('Home'),
@@ -94,8 +162,37 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
             ),
           ],
         ),
-        body: const Text(
-            "CreaWork"
+        body: Center(
+                child: Stack(
+                    children: [
+                FirebaseAnimatedList(query: monday,  itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
+                  condition();
+                  return ListTile(title:  Text(snapshot.key.toString()),
+                onTap:() {
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => WorkEdDetailScreen(data: data1[snapshot.key.toString()])
+                  ));
+                },
+              );
+            },
+            ),
+                  Positioned(top: 250,
+                    child:
+                  FirebaseAnimatedList(query: tuesday,  itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
+                    condition();
+                    return ListTile(title:  Text(snapshot.key.toString()),
+                      onTap:() {
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => WorkEdDetailScreen(data: data2[snapshot.key.toString()])
+                        ));
+                      },
+                    );
+                  },
+                  ),
+                  )
+                ])
+
+
         )
     );
   }

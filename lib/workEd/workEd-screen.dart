@@ -3,9 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/home-screen.dart';
 import 'package:project/pedometer-screen.dart';
 import 'package:project/settings.dart';
-import 'package:project/workEdList-screen.dart';
-import 'calendar-screen.dart';
-import 'createWorkout-screen.dart';
+import 'package:project/workEd/workEdList-screen.dart';
+import '../calendar-screen.dart';
+import '../createWorkout-screen.dart';
 
 class WorkEdScreen extends StatefulWidget {
   const WorkEdScreen({Key? key}) : super(key: key);
@@ -108,7 +108,7 @@ class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderSt
       body: CustomScrollView(
         slivers: <Widget>[SliverGrid(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 200.0,
+        maxCrossAxisExtent: 300.0,
         mainAxisSpacing: 10.0,
         crossAxisSpacing: 10.0,
         childAspectRatio: 1.0,
@@ -123,7 +123,7 @@ class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderSt
 
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent),
                 ),
-                child: Text(_muscleGroupsList[index]),
+                child: Text(_muscleGroupsList[index],style: const TextStyle(fontSize: 20)),
                 onPressed: () => {
 
                 Navigator.push(context, MaterialPageRoute(builder: (context) {

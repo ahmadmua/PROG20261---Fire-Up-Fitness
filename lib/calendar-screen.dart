@@ -4,7 +4,7 @@ import 'package:project/calendarEvent/event.dart';
 import 'package:project/home-screen.dart';
 import 'package:project/pedometer-screen.dart';
 import 'package:project/settings.dart';
-import 'package:project/workEd-screen.dart';
+import 'package:project/workEd/workEd-screen.dart';
 import 'createWorkout-screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 

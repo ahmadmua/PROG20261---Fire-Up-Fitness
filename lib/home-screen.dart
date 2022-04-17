@@ -8,7 +8,7 @@ import 'package:project/createWorkout-screen.dart';
 import 'package:project/pedometer-screen.dart';
 import 'package:project/register-screen.dart';
 import 'package:project/settings.dart';
-import 'package:project/workEd-screen.dart';
+import 'package:project/workEd/workEd-screen.dart';
 import 'login-screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
