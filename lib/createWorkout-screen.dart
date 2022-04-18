@@ -206,9 +206,13 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
         ],
       ),
       body:
+
+          SingleChildScrollView(child:
+
       Column(children: [
 
       ExpansionTile(title: const Text("Monday - Back & Biceps", style: TextStyle(fontSize: 25)), children: [
+
       FirebaseAnimatedList(
         shrinkWrap: true,
         query: monday,
@@ -297,6 +301,7 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
         ]),
 
         ExpansionTile(title: const Text("Friday - Core", style: TextStyle(fontSize: 25)), children: [
+
           FirebaseAnimatedList(
             shrinkWrap: true,
             query: friday,
@@ -319,7 +324,7 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
         ])
 
           ])
-
+          )
     );
   }
 }
