@@ -75,7 +75,7 @@ class _WorkEdListState extends State<WorkEdList>{
       body: Center(
         child: Flexible( child: FirebaseAnimatedList(query: _workoutRef, itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
 
-              return ListTile(title:  Text(snapshot.key.toString()),
+              return ListTile(title:  Text(snapshot.key.toString(),),
 
                 onTap:() {
                       Navigator.push(context, MaterialPageRoute(

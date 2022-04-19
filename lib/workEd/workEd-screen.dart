@@ -3,9 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/home-screen.dart';
 import 'package:project/pedometer-screen.dart';
 import 'package:project/settings.dart';
-import 'package:project/workEd/workEdList-screen.dart';
-import '../calendar-screen.dart';
-import '../createWorkout-screen.dart';
+import 'package:project/workEdList-screen.dart';
+import 'calendar-screen.dart';
+import 'createWorkout-screen.dart';
 
 class WorkEdScreen extends StatefulWidget {
   const WorkEdScreen({Key? key}) : super(key: key);
@@ -14,7 +14,8 @@ class WorkEdScreen extends StatefulWidget {
   State<WorkEdScreen> createState() => _WorkEdScreenState();
 }
 
-class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderStateMixin {
+class _WorkEdScreenState extends State<WorkEdScreen>
+    with SingleTickerProviderStateMixin {
   int _currentIndex = 3;
 
   final List<String> _muscleGroupsList = [
@@ -24,6 +25,15 @@ class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderSt
     "Back Legs",
     "Shoulders",
     "Core",
+  ];
+
+  final List<String> _muscleGroupsListPictures = [
+    "img1.jpg",
+    "img4.jpg",
+    "img2.jpg",
+    "img6.jpg",
+    "img3.jpg",
+    "img5.jpg",
   ];
 
   @override
@@ -106,33 +116,46 @@ class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderSt
         ],
       ),
       body: CustomScrollView(
-        slivers: <Widget>[SliverGrid(
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 300.0,
-        mainAxisSpacing: 10.0,
-        crossAxisSpacing: 10.0,
-        childAspectRatio: 1.0,
-          ),
-          delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-              return ElevatedButton(
-
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent),
-                ),
-                child: Text(_muscleGroupsList[index],style: const TextStyle(fontSize: 20)),
-                onPressed: () => {
-
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return WorkEdList(index: _muscleGroupsList[index].toString(), );
-                }
-                ))},
-              );
-            },
-            childCount: _muscleGroupsList.length,
-          ),
+        slivers: <Widget>[
+          SliverGrid(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 250.0,
+              mainAxisSpacing: 10.0,
+              crossAxisSpacing: 10.0,
+              childAspectRatio: 1,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return Container(
+                  margin: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(35))),
+                    ),
+                    child: Stack(
+                      //used stack to add items on each other
+                      children: [
+                        ClipRRect( borderRadius: BorderRadius.circular(35)  , child: Opacity(opacity: 0.4, child: Image.asset('assets/images/${_muscleGroupsListPictures[index].toString()}', height: 175, width: 175 ,fit: BoxFit.fill))),
+                        Positioned.fill(child: Align(alignment: Alignment.center, child:  Text(_muscleGroupsList[index].toString(), style: const TextStyle(fontSize: 20))))
+                      ],
+                    ),
+                    onPressed: () => {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                            return WorkEdList(
+                              index: _muscleGroupsList[index].toString(),
+                            );
+                          }))
+                    },
+                  ),
+                );
+              },
+              childCount: _muscleGroupsList.length,
+            ),
           ),
         ],
-      ) ,
+      ),
     );
   }
 }
