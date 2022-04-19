@@ -14,7 +14,8 @@ class WorkEdScreen extends StatefulWidget {
   State<WorkEdScreen> createState() => _WorkEdScreenState();
 }
 
-class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderStateMixin {
+class _WorkEdScreenState extends State<WorkEdScreen>
+    with SingleTickerProviderStateMixin {
   int _currentIndex = 3;
 
   final List<String> _muscleGroupsList = [
@@ -24,6 +25,15 @@ class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderSt
     "Back Legs",
     "Shoulders",
     "Core",
+  ];
+
+  final List<String> _muscleGroupsListPictures = [
+    "img1.jpg",
+    "img4.jpg",
+    "img2.jpg",
+    "img6.jpg",
+    "img3.jpg",
+    "img5.jpg",
   ];
 
   @override
@@ -106,37 +116,52 @@ class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderSt
         ],
       ),
       body: CustomScrollView(
-        slivers: <Widget>[SliverGrid(
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 200.0,
-        mainAxisSpacing: 10.0,
-        crossAxisSpacing: 10.0,
-        childAspectRatio: 1.0,
-          ),
-          delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-              return ElevatedButton(
+        slivers: <Widget>[
+          SliverGrid(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 250.0,
+              mainAxisSpacing: 10.0,
+              crossAxisSpacing: 10.0,
+              childAspectRatio: 1,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return ElevatedButton(
+                  //TODO need to improve the style of the buttons
+                  //perhaps add some images to the background of each button to give more of an appeal
 
-                //TODO need to improve the style of the buttons
-                //perhaps add some images to the background of each button to give more of an appeal
-
-
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent),
-                ),
-                child: Text(_muscleGroupsList[index]),
-                onPressed: () => {
-
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return WorkEdList(index: _muscleGroupsList[index].toString(), );
-                }
-                ))},
-              );
-            },
-            childCount: _muscleGroupsList.length,
-          ),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Colors.deepOrangeAccent),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(35))),
+                  ),
+                  child: Stack(
+                    //used stack to add items on each other
+                    children: [
+                      Opacity(opacity: 0.5, child: Image.asset('assets/images/${_muscleGroupsListPictures[index].toString()}',colorBlendMode: BlendMode.softLight , color: Colors.orange, height: 175, width: 175 ,fit: BoxFit.fill,)),
+                      Positioned.fill(child: Align(
+                        alignment: Alignment.center,
+                        child:  Text(_muscleGroupsList[index].toString(), style: TextStyle(fontSize: 20),),
+                      ))
+                    ],
+                  ),
+                  onPressed: () => {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return WorkEdList(
+                        index: _muscleGroupsList[index].toString(),
+                      );
+                    }))
+                  },
+                );
+              },
+              childCount: _muscleGroupsList.length,
+            ),
           ),
         ],
-      ) ,
+      ),
     );
   }
 }
