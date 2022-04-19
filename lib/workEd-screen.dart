@@ -126,35 +126,29 @@ class _WorkEdScreenState extends State<WorkEdScreen>
             ),
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return ElevatedButton(
-                  //TODO need to improve the style of the buttons
-                  //perhaps add some images to the background of each button to give more of an appeal
-
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Colors.deepOrangeAccent),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(35))),
+                return Container(
+                  margin: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(35))),
+                    ),
+                    child: Stack(
+                      //used stack to add items on each other
+                      children: [
+                        ClipRRect( borderRadius: BorderRadius.circular(35)  , child: Opacity(opacity: 0.4, child: Image.asset('assets/images/${_muscleGroupsListPictures[index].toString()}', height: 175, width: 175 ,fit: BoxFit.fill))),
+                        Positioned.fill(child: Align(alignment: Alignment.center, child:  Text(_muscleGroupsList[index].toString(), style: const TextStyle(fontSize: 20))))
+                      ],
+                    ),
+                    onPressed: () => {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                            return WorkEdList(
+                              index: _muscleGroupsList[index].toString(),
+                            );
+                          }))
+                    },
                   ),
-                  child: Stack(
-                    //used stack to add items on each other
-                    children: [
-                      Opacity(opacity: 0.5, child: Image.asset('assets/images/${_muscleGroupsListPictures[index].toString()}',colorBlendMode: BlendMode.softLight , color: Colors.orange, height: 175, width: 175 ,fit: BoxFit.fill,)),
-                      Positioned.fill(child: Align(
-                        alignment: Alignment.center,
-                        child:  Text(_muscleGroupsList[index].toString(), style: TextStyle(fontSize: 20),),
-                      ))
-                    ],
-                  ),
-                  onPressed: () => {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return WorkEdList(
-                        index: _muscleGroupsList[index].toString(),
-                      );
-                    }))
-                  },
                 );
               },
               childCount: _muscleGroupsList.length,

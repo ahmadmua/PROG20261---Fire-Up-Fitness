@@ -117,7 +117,7 @@ class _WorkEdDetailScreenState extends State<WorkEdDetailScreen>
                     borderRadius: BorderRadius.all(Radius.circular(10))
                   ),
                   child: Text(
-                      '${widget.data['description'].toString()}'),
+                      widget.data['description'].toString()),
                 ),
               ],
             ),
