@@ -117,10 +117,6 @@ class _WorkEdScreenState extends State<WorkEdScreen> with SingleTickerProviderSt
                 (BuildContext context, int index) {
               return ElevatedButton(
 
-                //TODO need to improve the style of the buttons
-                //perhaps add some images to the background of each button to give more of an appeal
-
-
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.deepOrangeAccent),
                 ),
                 child: Text(_muscleGroupsList[index],style: const TextStyle(fontSize: 20)),

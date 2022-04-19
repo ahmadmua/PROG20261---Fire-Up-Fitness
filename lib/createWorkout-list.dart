@@ -20,6 +20,7 @@ class CreateWorkoutList extends StatefulWidget{
 class _WorkList extends State<CreateWorkoutList>{
   late var data;
   late final DatabaseReference _workoutRef = FirebaseDatabase.instance.ref().child('Plan1/${widget.index}');
+  late final DatabaseReference _workoutRef2 = FirebaseDatabase.instance.ref().child('Plan2/${widget.index}');
 
   @override
   void initState() {
@@ -35,6 +36,14 @@ class _WorkList extends State<CreateWorkoutList>{
       });
       log(data.toString());
     });
+
+    _workoutRef2.onValue.listen((event) {
+      setState(() {
+        data = Map<String, dynamic>.from(event.snapshot.value as Map);
+      });
+      log(data.toString());
+    });
+
   }
 
 
@@ -65,7 +74,9 @@ class _WorkList extends State<CreateWorkoutList>{
           backgroundColor: const Color.fromRGBO(255, 130, 100, 1),
         ),
         body: Center(
-            child: Flexible( child: FirebaseAnimatedList(query: _workoutRef, itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
+            child: Column(children: [
+
+            Flexible( child: FirebaseAnimatedList(query: _workoutRef, itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
 
               return ListTile(title:  Text(snapshot.key.toString()),
 
@@ -78,7 +89,25 @@ class _WorkList extends State<CreateWorkoutList>{
               );
             },
             )
-            )
+            ),
+
+              Flexible( child: FirebaseAnimatedList(query: _workoutRef2, itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index) {
+
+                return ListTile(title:  Text(snapshot.key.toString()),
+
+                  onTap:() {
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => WorkEdDetailScreen(data: data[snapshot.key.toString()],)
+
+                    ));
+                  },
+                );
+              },
+              )
+              )
+
+            ]),
+
         )
     );
   }

@@ -98,7 +98,7 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
         .get()
         .then((value) => height = value.data()?['height']);
 
-    if (weight == 19) {
+    if (weight == 150) {
 
       monday = FirebaseDatabase.instance
           .ref()
@@ -120,10 +120,31 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
           .ref()
           .child('Plan1/${_muscleGroupsList[4]}');
 
+    } else if(weight > 150){
+
+      monday = FirebaseDatabase.instance
+          .ref()
+          .child('Plan2/${_muscleGroupsList[0]}');
+
+      tuesday = FirebaseDatabase.instance
+          .ref()
+          .child('Plan2/${_muscleGroupsList[1]}');
+
+      wednesday = FirebaseDatabase.instance
+          .ref()
+          .child('Plan2/${_muscleGroupsList[2]}');
+
+      thursday = FirebaseDatabase.instance
+          .ref()
+          .child('Plan2/${_muscleGroupsList[3]}');
+
+      friday = FirebaseDatabase.instance
+          .ref()
+          .child('Plan2/${_muscleGroupsList[4]}');
+
     }
 
   }
-
 
 
   @override

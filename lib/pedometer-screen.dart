@@ -184,7 +184,7 @@ class _PedometerScreenState extends State<PedometerScreen> {
             ),
             const Center(
               child: FaIcon(FontAwesomeIcons.personWalking,
-                  size: 190, color: Color.fromRGBO(120, 97, 255, 1.0)),
+                  size: 190, color: Color.fromRGBO(255, 130, 100, 1)),
             ),
             const SizedBox(
               height: 30,
