@@ -21,14 +21,20 @@ final kEvents = LinkedHashMap<DateTime, List<Event>>(
   hashCode: getHashCode,
 )..addAll(_kEventSource);
 
-final _kEventSource = { for (var item in List.generate(50, (index) => index)) DateTime.utc(kFirstDay.year, kFirstDay.month, item * 5) : List.generate(
-        item % 4 + 1, (index) => Event('Bicep $item | ${index + 1}')) }
-  ..addAll({
-    kToday: [
-      const Event('Biceps'),
-      const Event('Triceps'),
-    ],
-  });
+final _kEventSource = {
+
+  for (var item in List.generate(28, (index) => index)) DateTime.utc(kFirstDay.year, kFirstDay.month, item * 7):
+
+  List.generate(
+        1, (index) => const Event('SHOULDERS \n\nArnold Press - 3x8 (Sets, Reps)'
+      '\n\nBarbell Overhead Press - 3x8 (Sets, Reps)\n\n'
+      'Dumbbell Lateral Raises - 3x12 (Sets, Reps)\n\n'
+      'Scapula Shrugs - 3x20 (Sets, Reps)'
+  ),
+  ),
+};
+
+
 
 int getHashCode(DateTime key) {
   return key.day * 1000000 + key.month * 10000 + key.year;
@@ -43,5 +49,5 @@ List<DateTime> daysInRange(DateTime first, DateTime last) {
 }
 
 final kToday = DateTime.now();
-final kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
-final kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
+final kFirstDay = DateTime(kToday.year, kToday.month, kToday.day);
+final kLastDay = DateTime(kToday.year+500, kToday.month + 500, kToday.day);

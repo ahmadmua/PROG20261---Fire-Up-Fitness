@@ -4,13 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/pedometer-screen.dart';
 import 'package:project/settings.dart';
-import 'package:project/workEd-screen.dart';
-import 'package:project/workEdList-screen.dart';
+import 'package:project/workEd/workEdList-screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
-import 'calendar-screen.dart';
-import 'createWorkout-screen.dart';
-import 'home-screen.dart';
 
 class WorkEdDetailScreen extends StatefulWidget {
   const WorkEdDetailScreen({Key? key, required this.data}) : super(key: key);
@@ -37,14 +32,6 @@ class _WorkEdDetailScreenState extends State<WorkEdDetailScreen>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return WorkEdList(index: widget.data['parent']);
-              }));
-            },
-          ),
           automaticallyImplyLeading: false,
           title: Text(widget.data['name'].toString()),
           actions: [

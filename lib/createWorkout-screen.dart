@@ -19,11 +19,11 @@ class CreateWorkoutScreen extends StatefulWidget {
 }
 
 
-late DatabaseReference monday = FirebaseDatabase.instance.ref().child('');
-late DatabaseReference tuesday = FirebaseDatabase.instance.ref().child('');
-late DatabaseReference wednesday = FirebaseDatabase.instance.ref().child('');
-late DatabaseReference thursday = FirebaseDatabase.instance.ref().child('');
-late DatabaseReference friday = FirebaseDatabase.instance.ref().child('');
+late DatabaseReference monday ;
+late DatabaseReference tuesday ;
+late DatabaseReference wednesday ;
+late DatabaseReference thursday ;
+late DatabaseReference friday;
 
 class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
   var weight = 0;
@@ -47,6 +47,9 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
   }
 
   void _activateListeners() {
+
+    setState(() {
+
     monday.onValue.listen((event) {
       setState(() {
         data1 = Map<String, dynamic>.from(event.snapshot.value as Map);
@@ -82,6 +85,8 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
       });
     });
 
+    });
+
   }
 
   void condition() {
@@ -98,7 +103,7 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
         .get()
         .then((value) => height = value.data()?['height']);
 
-    if (weight == 150) {
+    if (weight == 100) {
 
       monday = FirebaseDatabase.instance
           .ref()
@@ -120,7 +125,7 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
           .ref()
           .child('Plan1/${_muscleGroupsList[4]}');
 
-    } else if(weight > 150){
+    } else if(weight > 100){
 
       monday = FirebaseDatabase.instance
           .ref()
@@ -227,7 +232,6 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
         ],
       ),
       body:
-
           SingleChildScrollView(child:
 
       Column(children: [
@@ -239,6 +243,7 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
         query: monday,
         itemBuilder: (BuildContext context, DataSnapshot snapshot,
             Animation<double> animation, int index) {
+
           condition();
 
             return ListTile(
@@ -261,7 +266,7 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
           query: tuesday,
           itemBuilder: (BuildContext context, DataSnapshot snapshot,
               Animation<double> animation, int index) {
-            condition();
+
 
               return ListTile(
                 title: Text(snapshot.key.toString()),
@@ -283,7 +288,7 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
             query: wednesday,
             itemBuilder: (BuildContext context, DataSnapshot snapshot,
                 Animation<double> animation, int index) {
-              condition();
+
 
               return ListTile(
                 title: Text(snapshot.key.toString()),
@@ -305,7 +310,7 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
             query: thursday,
             itemBuilder: (BuildContext context, DataSnapshot snapshot,
                 Animation<double> animation, int index) {
-              condition();
+
 
               return ListTile(
                 title: Text(snapshot.key.toString()),
@@ -328,7 +333,7 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
             query: friday,
             itemBuilder: (BuildContext context, DataSnapshot snapshot,
                 Animation<double> animation, int index) {
-              condition();
+
 
               return ListTile(
                 title: Text(snapshot.key.toString()),

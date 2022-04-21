@@ -3,9 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project/home-screen.dart';
 import 'package:project/pedometer-screen.dart';
 import 'package:project/settings.dart';
-import 'package:project/workEdList-screen.dart';
-import 'calendar-screen.dart';
-import 'createWorkout-screen.dart';
+import 'package:project/workEd/workEdList-screen.dart';
+import '../calendar-screen.dart';
+import '../createWorkout-screen.dart';
 
 class WorkEdScreen extends StatefulWidget {
   const WorkEdScreen({Key? key}) : super(key: key);

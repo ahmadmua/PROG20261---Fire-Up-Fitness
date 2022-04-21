@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Column(
           children: [
             const SizedBox(
-              height: 110,
+              height: 90,
             ),
 
             IconButton(
@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const Text("Workout Plan", style: TextStyle(fontSize: 25)),
 
             const SizedBox(
-              height: 50,
+              height: 40,
             ),
 
             IconButton(
@@ -81,13 +81,15 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             const Text("Workout", style: TextStyle(fontSize: 25)),
+            SizedBox(height: 5),
             const Text("Education", style: TextStyle(fontSize: 25)),
+
           ],
         ),
         Column(
           children: [
             const SizedBox(
-              height: 110,
+              height: 90,
             ),
             IconButton(
               icon: const Icon(Icons.calendar_month),

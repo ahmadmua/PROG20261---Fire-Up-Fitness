@@ -42,11 +42,13 @@ class _WeightSettingsScreen extends State<WeightSettingsScreen> {
                 ),
               ),
               onPressed: () {
+                setState(() {
                 final User? user = FirebaseAuth.instance.currentUser;
                 FirebaseFirestore.instance.collection('UserData').doc(user?.uid).update({"weight": weight}).then((value){
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const SettingsScreen();
                   }));
+                });
                 });
               },
               child: const Text(
