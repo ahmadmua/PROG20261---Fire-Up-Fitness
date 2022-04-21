@@ -19,11 +19,11 @@ class CreateWorkoutScreen extends StatefulWidget {
 }
 
 
-late DatabaseReference monday ;
-late DatabaseReference tuesday ;
-late DatabaseReference wednesday ;
-late DatabaseReference thursday ;
-late DatabaseReference friday;
+late DatabaseReference monday = FirebaseDatabase.instance.ref().child('');
+late DatabaseReference tuesday = FirebaseDatabase.instance.ref().child('');
+late DatabaseReference wednesday = FirebaseDatabase.instance.ref().child('');
+late DatabaseReference thursday = FirebaseDatabase.instance.ref().child('');
+late DatabaseReference friday = FirebaseDatabase.instance.ref().child('');
 
 class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
   var weight = 0;
