@@ -127,6 +127,7 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
 
     } else if(weight > 100){
 
+
       monday = FirebaseDatabase.instance
           .ref()
           .child('Plan2/${_muscleGroupsList[0]}');
@@ -146,6 +147,7 @@ class _CreateWorkoutScreenState extends State<CreateWorkoutScreen> {
       friday = FirebaseDatabase.instance
           .ref()
           .child('Plan2/${_muscleGroupsList[4]}');
+
 
     }
 
